@@ -5,7 +5,6 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.shia.library.BuildConfig;
 import okhttp3.*;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -25,16 +24,22 @@ public class RxRetrofit {
 
     private static Context CONTEXT;
     public static String BASE_URL;
-    private static Retrofit retrofit;
+    private static Retrofit RETROFIT;
+    private static boolean DEBUG;
 
     public static void config(Context context, String baseUrl) {
+        config(context, baseUrl, true);
+    }
+
+    public static void config(Context context, String baseUrl, boolean isDebug) {
         CONTEXT = context;
         BASE_URL = baseUrl;
-        retrofit = getRetrofit(context, baseUrl);
+        DEBUG = isDebug;
+        RETROFIT = getRetrofit(context, baseUrl);
     }
 
     public static void resetWithInterceptor(Interceptor interceptor) {
-        retrofit = getRetrofit(CONTEXT, BASE_URL, interceptor);
+        RETROFIT = getRetrofit(CONTEXT, BASE_URL, interceptor);
     }
 
     public static Retrofit getRetrofit(final Context context, String baseUrl) {
@@ -99,7 +104,7 @@ public class RxRetrofit {
         builder.addInterceptor(headerInterceptor);
 
         // Log信息拦截器
-        if (BuildConfig.DEBUG) {
+        if (DEBUG) {
             // log信息拦截器
             HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -131,8 +136,8 @@ public class RxRetrofit {
         return retrofit;
     }
 
-    public static Retrofit getRetrofit() {
-        return retrofit;
+    public static Retrofit getRETROFIT() {
+        return RETROFIT;
     }
 
 }

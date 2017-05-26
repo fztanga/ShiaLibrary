@@ -138,7 +138,7 @@ public class SwipeRefreshHelper {
             swipeRefreshLayout.setEnabled(false);
             params.put(PAGE_INDEX_NAME, currentPageIndex + 1);
         }
-        QueryService service = RxRetrofit.getRetrofit().create(QueryService.class);
+        QueryService service = RxRetrofit.getRETROFIT().create(QueryService.class);
         Observable<ResponseBody> observable = post ? service.postQuery(requestUrl, params) : service.query(requestUrl,
                 params);
         observable.subscribeOn(Schedulers.io()).map(new Function<ResponseBody, List>() {
