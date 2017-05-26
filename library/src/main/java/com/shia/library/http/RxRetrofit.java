@@ -136,7 +136,7 @@ public class RxRetrofit {
         return retrofit;
     }
 
-    public static Retrofit getRETROFIT() {
+    public static Retrofit getRetrofit() {
         return RETROFIT;
     }
 
