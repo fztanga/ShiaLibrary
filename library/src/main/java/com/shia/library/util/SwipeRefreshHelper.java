@@ -174,6 +174,7 @@ public class SwipeRefreshHelper {
 
             @Override
             public void onError(Throwable e) {
+                e.printStackTrace();
                 Toast.makeText(recyclerView.getContext(), R.string.network_error, Toast.LENGTH_SHORT).show();
                 adapter.loadMoreFail();
             }

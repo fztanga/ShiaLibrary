@@ -21,6 +21,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
+    protected void onCreate(Bundle savedInstanceState, int requestedOrientation) {
+        super.onCreate(savedInstanceState);
+        setRequestedOrientation(requestedOrientation);
+    }
+
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
@@ -138,12 +143,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public Resources getResources() {
-//        Resources res = super.getResources();
-//        Configuration config = new Configuration();
-//        config.setToDefaults();
-//        res.updateConfiguration(config, res.getDisplayMetrics());
-//        return res;
-//    }
+    // @Override
+    // public Resources getResources() {
+    // Resources res = super.getResources();
+    // Configuration config = new Configuration();
+    // config.setToDefaults();
+    // res.updateConfiguration(config, res.getDisplayMetrics());
+    // return res;
+    // }
 }

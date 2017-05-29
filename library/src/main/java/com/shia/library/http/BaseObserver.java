@@ -53,11 +53,10 @@ public abstract class BaseObserver<T> implements Observer<Response<T>> {
 
     @Override
     public void onError(Throwable e) {
-
+        e.printStackTrace();
         if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
         }
-
         Toast.makeText(mContext, R.string.network_error, Toast.LENGTH_LONG).show();
     }
 
