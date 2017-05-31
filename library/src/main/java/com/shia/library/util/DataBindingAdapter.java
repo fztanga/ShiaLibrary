@@ -17,7 +17,7 @@ public class DataBindingAdapter {
     @BindingAdapter("android:layout_width")
     public static void setLayoutWidth(View view, float width) {
         ViewGroup.LayoutParams params = view.getLayoutParams();
-        params.height = (int) width;
+        params.width = (int) width;
         view.setLayoutParams(params);
     }
 

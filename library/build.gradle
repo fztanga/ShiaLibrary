@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
-version = "1.0.2"
+version = "1.0.4"
 
 android {
     compileSdkVersion 25
@@ -65,7 +65,7 @@ publish {
     userOrg = 'hy3112'
     groupId = 'com.github.hy3112'
     artifactId = 'shia-library'
-    publishVersion = '1.0.2'
+    publishVersion = '1.0.4'
     desc = 'It is a library for Android.'
     website = 'https://github.com/hy3112/ShiaLibrary'
 }

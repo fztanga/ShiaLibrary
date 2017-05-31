@@ -37,8 +37,8 @@ public class SwipeRefreshHelper {
     private boolean post;// 是否是post方式
     private String requestUrl;
 
-    private String PAGE_INDEX_NAME = "pageIndex";
-    private String PAGE_SIZE_NAME = "pageSize";
+    private String PAGE_INDEX_NAME = "_pageIndex";
+    private String PAGE_SIZE_NAME = "_pageSize";
     private int PAGE_INDEX = 0;
     private int PAGE_SIZE = 10;
     private int currentPageIndex;
@@ -61,7 +61,7 @@ public class SwipeRefreshHelper {
 
         this.swipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         this.recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-        this.recyclerView.addItemDecoration(new LinearItemDecoration());
+        // this.recyclerView.addItemDecoration(new LinearItemDecoration());
 
         this.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -69,6 +69,11 @@ public class SwipeRefreshHelper {
                 loadData(WHAT_DID_REFRESH);
             }
         });
+        return this;
+    }
+
+    public SwipeRefreshHelper addItemDecoration(RecyclerView.ItemDecoration decor) {
+        this.recyclerView.addItemDecoration(decor);
         return this;
     }
 
