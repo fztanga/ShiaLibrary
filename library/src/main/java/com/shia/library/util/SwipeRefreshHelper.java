@@ -1,6 +1,7 @@
 package com.shia.library.util;
 
 import android.graphics.Color;
+import android.support.annotation.ColorInt;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,6 +37,7 @@ public class SwipeRefreshHelper {
 
     private boolean post;// 是否是post方式
     private String requestUrl;
+    private QueryService queryService;
 
     private String PAGE_INDEX_NAME = "_pageIndex";
     private String PAGE_SIZE_NAME = "_pageSize";
@@ -69,6 +71,11 @@ public class SwipeRefreshHelper {
                 loadData(WHAT_DID_REFRESH);
             }
         });
+        return this;
+    }
+
+    public SwipeRefreshHelper setColorSchemeColors(@ColorInt int... colors) {
+        this.swipeRefreshLayout.setColorSchemeColors(colors);
         return this;
     }
 
@@ -112,6 +119,7 @@ public class SwipeRefreshHelper {
     public SwipeRefreshHelper configRequest(String requestUrl, DataGridConverter dataGridConverter) {
         this.requestUrl = requestUrl;
         this.dataGridConverter = dataGridConverter;
+        queryService = RxRetrofit.getRetrofit().create(QueryService.class);
         return this;
     }
 
@@ -119,6 +127,7 @@ public class SwipeRefreshHelper {
         this.post = true;
         this.requestUrl = requestUrl;
         this.dataGridConverter = dataGridConverter;
+        queryService = RxRetrofit.getRetrofit().create(QueryService.class);
         return this;
     }
 
@@ -143,8 +152,7 @@ public class SwipeRefreshHelper {
             swipeRefreshLayout.setEnabled(false);
             params.put(PAGE_INDEX_NAME, currentPageIndex + 1);
         }
-        QueryService service = RxRetrofit.getRetrofit().create(QueryService.class);
-        Observable<ResponseBody> observable = post ? service.postQuery(requestUrl, params) : service.query(requestUrl,
+        Observable<ResponseBody> observable = post ? queryService.postQuery(requestUrl, params) : queryService.query(requestUrl,
                 params);
         observable.subscribeOn(Schedulers.io()).map(new Function<ResponseBody, List>() {
             @Override
