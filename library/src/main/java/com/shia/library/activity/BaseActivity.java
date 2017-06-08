@@ -12,8 +12,8 @@ import com.shia.library.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
-    private TextView titleTextView, leftButton, rightButton;
+    protected Toolbar toolbar;
+    protected TextView titleTextView, leftButton, rightButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    private void configureToolbar() {
+    protected void configureToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         titleTextView = (TextView) findViewById(R.id.title);
         leftButton = (TextView) findViewById(R.id.left_button);
@@ -142,13 +142,4 @@ public abstract class BaseActivity extends AppCompatActivity {
             toolbar.setVisibility(visible ? View.VISIBLE : View.GONE);
         }
     }
-
-    // @Override
-    // public Resources getResources() {
-    // Resources res = super.getResources();
-    // Configuration config = new Configuration();
-    // config.setToDefaults();
-    // res.updateConfiguration(config, res.getDisplayMetrics());
-    // return res;
-    // }
 }

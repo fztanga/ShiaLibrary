@@ -20,8 +20,8 @@ import com.shia.library.R;
 public class BaseFragment extends Fragment {
 
     public Context mContext;
-    private Toolbar toolbar;
-    private TextView titleTextView, leftButton, rightButton;
+    protected Toolbar toolbar;
+    protected TextView titleTextView, leftButton, rightButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class BaseFragment extends Fragment {
         return binding;
     }
 
-    private void initToolbar(View view) {
+    protected void initToolbar(View view) {
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         titleTextView = (TextView) view.findViewById(R.id.title);
         leftButton = (TextView) view.findViewById(R.id.left_button);
