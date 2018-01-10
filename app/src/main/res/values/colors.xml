@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="colorPrimary">#e60012</color>
+	<color name="colorPrimaryDark">#e60012</color>
+	<color name="colorAccent">#e60012</color>
+	<color name="colorAccentDark">#999</color>
+
+	<color name="colorButton">#e60012</color>
+	<color name="colorButtonDown">#b3000f</color>
+
+	<color name="white">#FFF</color>
+
+	<color name="colorBackground">#f5f2f2</color>
+	<color name="colorDivider">#dedede</color>
+	<color name="colorText">#101010</color>
+	<color name="colorTextHint">#bbb</color>
+	<color name="colorRemark">#c0c0c0</color>
+
+	<color name="colorGray">#999999</color>
+	<color name="colorBlue">#42a4e5</color>
+	<color name="colorLabel">#666</color>
+</resources>

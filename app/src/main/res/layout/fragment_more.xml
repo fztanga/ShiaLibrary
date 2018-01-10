@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<data>
+		<import type="android.view.View"/>
+		<variable name="isLogin" type="Boolean"/>
+		<variable name="handler" type="com.shia.sample.fragment.MoreFragment"/>
+	</data>
+
+	<LinearLayout android:layout_width="match_parent"
+				  android:layout_height="match_parent"
+				  android:orientation="vertical">
+
+		<include layout="@layout/layout_title_toolbar"/>
+
+		<TextView
+				style="@style/custom.navigation"
+				android:text="登录"
+				android:onClick="@{handler.login}"
+				android:drawableLeft="@drawable/ico_more_password"
+				android:visibility='@{!isLogin ? View.VISIBLE : View.GONE}'/>
+
+		<TextView
+				style="@style/custom.navigation"
+				android:text="修改密码"
+				android:onClick="@{handler.modifyPwd}"
+				android:drawableLeft="@drawable/ico_more_password"
+				android:visibility='@{isLogin ? View.VISIBLE : View.GONE}'/>
+
+		<TextView
+				style="@style/custom.navigation"
+				android:text="意见反馈"
+				android:onClick="@{handler.feedback}"
+				android:drawableLeft="@drawable/ico_more_suggest"/>
+
+		<TextView
+				style="@style/custom.navigation"
+				android:text="关于"
+				android:onClick="@{handler.about}"
+				android:drawableLeft="@drawable/ico_more_info"/>
+
+		<Button
+				style="@style/custom.button"
+				android:id="@+id/login_button"
+				android:layout_marginTop="50dip"
+				android:background="@drawable/button_logout_selector"
+				android:textColor="@color/colorPrimary"
+				android:text="退出登录"
+				android:onClick="@{handler.logout}"
+				android:visibility='@{isLogin ? View.VISIBLE : View.GONE}'/>
+	</LinearLayout>
+</layout>
