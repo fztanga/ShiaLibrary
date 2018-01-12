@@ -29,9 +29,7 @@
         <ImageView
                 android:id="@+id/img_more"
                 style="@style/AppTheme.NoActionBar.textMore"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                tools:src="@drawable/ic_right" />
+                tools:src="@android:drawable/ic_menu_search" />
         <TextView
                 android:id="@+id/txt_more"
                 style="@style/AppTheme.NoActionBar.textMore"

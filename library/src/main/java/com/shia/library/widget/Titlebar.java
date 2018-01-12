@@ -41,7 +41,10 @@ public class Titlebar extends LinearLayout {
             backText = ta.getString(R.styleable.Titlebar_backText);
             moreImg = ta.getResourceId(R.styleable.Titlebar_moreImg, 0);
             moreText = ta.getString(R.styleable.Titlebar_moreText);
-            setUpView();
+
+            if (!isInEditMode()) {
+                setUpView();
+            }
         } finally {
             ta.recycle();
         }
