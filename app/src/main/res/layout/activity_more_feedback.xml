@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:app="http://schemas.android.com/apk/res-auto"
 			  android:layout_width="fill_parent"
 			  android:layout_height="wrap_content"
 			  android:orientation="vertical">
 
-	<include layout="@layout/layout_title_toolbar"/>
+	<com.shia.library.widget.Titlebar
+			android:id="@+id/titlebar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:backText="取消"
+			app:titleText="意见反馈"
+			app:moreText="提交"/>
 
 	<TextView
 			android:id="@+id/app_info"

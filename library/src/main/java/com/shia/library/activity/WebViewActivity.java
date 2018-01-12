@@ -10,15 +10,18 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.*;
 import android.widget.EditText;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.shia.library.R;
+import com.shia.library.widget.Titlebar;
+
 import java.util.Stack;
 
-public class WebViewActivity extends BaseActivity {
+public class WebViewActivity extends AppCompatActivity {
     private WebView mWebView;
     protected Stack<String> stack = new Stack<String>();
 
@@ -26,7 +29,9 @@ public class WebViewActivity extends BaseActivity {
 
     private String jsUrl;
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +41,7 @@ public class WebViewActivity extends BaseActivity {
         Intent intent = this.getIntent();
         String title = intent.getStringExtra("title");
         if (title != null) {
-            setTitle(title);
+            ((Titlebar) findViewById(R.id.titlebar)).setTitleText(title);
         }
         String url = intent.getStringExtra("url");
         String data = intent.getStringExtra("data");
@@ -82,7 +87,7 @@ public class WebViewActivity extends BaseActivity {
         mWebView.setDownloadListener(new DownloadListener() {
             @Override
             public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype,
-                    long contentLength) {
+                                        long contentLength) {
                 Uri uri = Uri.parse(url);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
@@ -179,7 +184,7 @@ public class WebViewActivity extends BaseActivity {
          * window.prompt('请输入您的域名地址', '618119.com');
          */
         public boolean onJsPrompt(WebView view, String url, String message, String defaultValue,
-                final JsPromptResult result) {
+                                  final JsPromptResult result) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
             builder.setTitle("对话框").setMessage(message);

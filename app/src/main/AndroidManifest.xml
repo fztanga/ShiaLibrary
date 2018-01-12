@@ -19,22 +19,22 @@
 				 android:supportsRtl="true"
 				 android:theme="@style/AppTheme.NoActionBar">
 		<activity android:name="com.shia.sample.activity.SplashActivity"
-				  android:theme="@style/AppTheme.Splash">
+				  android:theme="@style/AppTheme.Splash"
+				  android:screenOrientation="portrait">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.shia.sample.activity.MainActivity"/>
+		<activity android:name="com.shia.sample.activity.MainActivity"
+				  android:screenOrientation="portrait"/>
 
-		<activity android:name="com.shia.sample.activity.LoginActivity"/>
+		<activity android:name="com.shia.sample.activity.LoginActivity"
+				  android:screenOrientation="portrait"/>
 
-		<activity android:name="com.shia.sample.activity.ModifyPwdActivity"/>
-
-		<activity android:name="com.shia.sample.activity.AboutActivity"/>
-
-		<activity android:name="com.shia.sample.activity.FeedbackActivity"/>
+		<activity android:name="com.shia.sample.activity.FeedbackActivity"
+				  android:screenOrientation="portrait"/>
 
 		<provider
 				android:name="android.support.v4.content.FileProvider"

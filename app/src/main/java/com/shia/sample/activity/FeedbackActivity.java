@@ -1,28 +1,27 @@
 package com.shia.sample.activity;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.DeviceUtils;
+import com.blankj.utilcode.util.ToastUtils;
+import com.shia.library.widget.Titlebar;
 import com.shia.sample.R;
-import com.shia.library.activity.BaseActivity;
 
-public class FeedbackActivity extends BaseActivity {
+public class FeedbackActivity extends AppCompatActivity {
     private EditText feedback;
 
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         setContentView(R.layout.activity_more_feedback);
 
-        setTitle("意见反馈");
-        setNavigationText("取消");
-        setOptionButtonText("提交");
-        setOptionButtonOnClickListener(new View.OnClickListener() {
+        ((Titlebar) findViewById(R.id.titlebar)).setMoreTextAction(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                System.out.println("---------");
+            public void onClick(View v) {
+                ToastUtils.showShortToast("提交");
             }
         });
 

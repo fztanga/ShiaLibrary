@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.shia.sample.R;
-import com.shia.library.fragment.BaseFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by administrator on 2017/3/25.
  */
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends Fragment {
 
     private ViewPager mViewPager;
     private SegmentTabLayout mTabLayout;

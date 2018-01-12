@@ -1,6 +1,7 @@
 package com.shia.sample.activity;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import com.blankj.utilcode.util.ToastUtils;
@@ -8,18 +9,17 @@ import com.github.yoojia.inputs.AndroidNextInputs;
 import com.github.yoojia.inputs.Scheme;
 import com.github.yoojia.inputs.WidgetAccess;
 import com.github.yoojia.inputs.verifiers.NotEmptyVerifier;
+import com.shia.library.http.RxRetrofit;
+import com.shia.library.http.RxSchedulers;
 import com.shia.sample.R;
 import com.shia.sample.application.AppApplication;
 import com.shia.sample.bean.User;
 import com.shia.sample.event.LoginEvent;
 import com.shia.sample.service.AppService;
 import com.shia.sample.service.WHKPBObserver;
-import com.shia.library.activity.BaseActivity;
-import com.shia.library.http.RxRetrofit;
-import com.shia.library.http.RxSchedulers;
 import org.greenrobot.eventbus.EventBus;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends AppCompatActivity {
     private EditText loginPhone, loginPwd;
     private static final String TAG = "LoginActivity";
 

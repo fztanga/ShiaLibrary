@@ -1,27 +1,26 @@
 package com.shia.sample.fragment;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.shia.library.util.SwipeRefreshHelper;
 import com.shia.sample.R;
 import com.shia.sample.adapter.NewsAdapter;
 import com.shia.sample.bean.News;
 import com.shia.sample.service.WHKPBDataGridConverter;
-import com.shia.library.fragment.BaseFragment;
-import com.shia.library.util.SwipeRefreshHelper;
 
 /**
  * Created by administrator on 2017/3/25.
  */
-public class Home3TypicalLeadFragment extends BaseFragment {
+public class Home3TypicalLeadFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflate(inflater, R.layout.layout_recycler_refresh, container, false);
-        setToolbarVisible(false);
+        View view = inflater.inflate(R.layout.activity_recycler_refresh_notitle, container, false);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshlayout);

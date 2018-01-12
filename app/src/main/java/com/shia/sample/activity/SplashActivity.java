@@ -2,15 +2,15 @@ package com.shia.sample.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.shia.sample.R;
+import android.support.v7.app.AppCompatActivity;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-import com.shia.library.activity.BaseActivity;
+import com.shia.sample.R;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
 import java.util.concurrent.TimeUnit;
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

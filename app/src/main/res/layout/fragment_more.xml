@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<data>
 		<import type="android.view.View"/>
@@ -11,7 +12,11 @@
 				  android:layout_height="match_parent"
 				  android:orientation="vertical">
 
-		<include layout="@layout/layout_title_toolbar"/>
+		<com.shia.library.widget.Titlebar
+				android:id="@+id/titlebar"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:titleText="更多"/>
 
 		<TextView
 				style="@style/custom.navigation"
