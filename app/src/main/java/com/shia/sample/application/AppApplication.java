@@ -36,7 +36,7 @@ public class AppApplication extends Application {
         Utils.init(this);
 
         // 保存用户信息
-        SPUtils sp = new SPUtils("user");
+        SPUtils sp = SPUtils.getInstance("user");
         String userId = sp.getString("userId");
         if (userId != null && !"".equals(userId)) {
             User user = new User();
@@ -79,7 +79,7 @@ public class AppApplication extends Application {
     public void setUser(final User user) {
         this.user = user;
 
-        SPUtils sp = new SPUtils("user");
+        SPUtils sp = SPUtils.getInstance("user");
         if (user != null) {
             // 保存用户信息
             sp.put("username", user.getUsername());

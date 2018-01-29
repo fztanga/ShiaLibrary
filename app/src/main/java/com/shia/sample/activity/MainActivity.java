@@ -3,6 +3,7 @@ package com.shia.sample.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import com.blankj.utilcode.util.BarUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.shia.sample.R;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        BarUtils.setStatusBarColor(this, getResources().getColor(R.color.colorPrimaryDark));
 
         mTabLayout = (CommonTabLayout) findViewById(R.id.sliding_tabs);
 

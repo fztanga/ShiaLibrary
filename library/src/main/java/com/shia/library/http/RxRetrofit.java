@@ -1,8 +1,10 @@
 package com.shia.library.http;
 
 import android.content.Context;
-import com.blankj.utilcode.util.AppUtils;
-import com.blankj.utilcode.util.NetworkUtils;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import okhttp3.*;
@@ -55,11 +57,19 @@ public class RxRetrofit {
             @Override
             public okhttp3.Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                if (!NetworkUtils.isAvailableByPing()) {
+                boolean isNetworkConnected = false;
+                ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                        .getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+                if (mNetworkInfo != null) {
+                    isNetworkConnected = mNetworkInfo.isAvailable();
+                }
+
+                if (!isNetworkConnected) {
                     request = request.newBuilder().cacheControl(CacheControl.FORCE_CACHE).build();
                 }
                 okhttp3.Response response = chain.proceed(request);
-                if (NetworkUtils.isAvailableByPing()) {
+                if (isNetworkConnected) {
                     int maxAge = 0;
                     // 有网络时 设置缓存超时时间0个小时
                     response.newBuilder().header("Cache-Control", "public, max-age=" + maxAge).removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
@@ -81,8 +91,16 @@ public class RxRetrofit {
             public okhttp3.Response intercept(Chain chain) throws IOException {
                 Request originalRequest = chain.request();
                 String method = originalRequest.method();
-                HttpUrl modifiedUrl = originalRequest.url().newBuilder().addQueryParameter("platform", "adnroid")
-                        .addQueryParameter("version", AppUtils.getAppVersionName(context)).build();
+                PackageManager packageManager = context.getPackageManager();
+                PackageInfo packageInfo;
+                String versionName = "";
+                try {
+                    packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+                    versionName = packageInfo.versionName;
+                } catch (Exception e) {
+                }
+                HttpUrl modifiedUrl = originalRequest.url().newBuilder().addQueryParameter("platform", "android")
+                        .addQueryParameter("version", versionName).build();
                 return chain.proceed(originalRequest.newBuilder().url(modifiedUrl).build());
             }
         };

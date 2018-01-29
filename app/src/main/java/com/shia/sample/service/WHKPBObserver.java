@@ -80,7 +80,7 @@ public abstract class WHKPBObserver<T extends WHKPBResponse> implements Observer
         return new WHKPBObserver<WHKPBResponse>(context) {
             @Override
             protected void onSuccess(WHKPBResponse response) {
-                ToastUtils.showShortToast(message);
+                ToastUtils.showShort(message);
             }
         };
     }
@@ -89,7 +89,7 @@ public abstract class WHKPBObserver<T extends WHKPBResponse> implements Observer
         return new WHKPBObserver<WHKPBResponse>(activity) {
             @Override
             protected void onSuccess(WHKPBResponse response) {
-                ToastUtils.showShortToast(message);
+                ToastUtils.showShort(message);
                 activity.finish();
             }
         };

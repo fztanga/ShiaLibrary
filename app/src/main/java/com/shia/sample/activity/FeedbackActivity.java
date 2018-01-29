@@ -21,14 +21,14 @@ public class FeedbackActivity extends AppCompatActivity {
         ((Titlebar) findViewById(R.id.titlebar)).setMoreTextAction(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showShortToast("提交");
+                ToastUtils.showShort("提交");
             }
         });
 
         feedback = (EditText) findViewById(R.id.feedback);
 
-        String appInfo = "设备：" + DeviceUtils.getModel() + "  系统：" + DeviceUtils.getSDKVersion() + "  当前版本："
-                + AppUtils.getAppVersionName(this);
+        String appInfo = "设备：" + DeviceUtils.getModel() + "  系统：" + DeviceUtils.getSDKVersionName() + "  当前版本："
+                + AppUtils.getAppVersionName();
         ((TextView) findViewById(R.id.app_info)).setText(appInfo);
 
     }

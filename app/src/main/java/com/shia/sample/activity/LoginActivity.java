@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 @Override
                                 protected void onError(String code, String message) {
-                                    ToastUtils.showShortToast("用户名或密码错误！");
+                                    ToastUtils.showShort("用户名或密码错误！");
                                 }
                             });
                 }
