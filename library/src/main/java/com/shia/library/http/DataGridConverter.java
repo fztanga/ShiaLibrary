@@ -12,10 +12,10 @@ public class DataGridConverter {
 
     protected Class clazz;
 
-    protected DataGridConverter() {
+    public DataGridConverter() {
     }
 
-    protected DataGridConverter(Class clazz) {
+    public DataGridConverter(Class clazz) {
         this.clazz = clazz;
     }
 

@@ -15,17 +15,18 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.*;
 import android.widget.EditText;
-import com.afollestad.materialdialogs.MaterialDialog;
+import android.widget.ProgressBar;
 import com.shia.library.R;
+import com.shia.library.widget.SlowlyProgressBar;
 import com.shia.library.widget.Titlebar;
 
 import java.util.Stack;
 
 public class WebViewActivity extends AppCompatActivity {
     private WebView mWebView;
-    protected Stack<String> stack = new Stack<String>();
+    private SlowlyProgressBar slowlyProgressBar;
 
-    protected MaterialDialog dialog;
+    protected Stack<String> stack = new Stack<String>();
 
     private String jsUrl;
 
@@ -36,7 +37,7 @@ public class WebViewActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_webview);
+        setContentView(R.layout.activity_common_webview);
 
         Intent intent = this.getIntent();
         String title = intent.getStringExtra("title");
@@ -47,8 +48,10 @@ public class WebViewActivity extends AppCompatActivity {
         String data = intent.getStringExtra("data");
         jsUrl = intent.getStringExtra("jsUrl");
 
-        dialog = new MaterialDialog.Builder(WebViewActivity.this).content("请稍后...").progress(true, 0).show();
-
+        slowlyProgressBar = new SlowlyProgressBar
+                (
+                        (ProgressBar) findViewById(R.id.ProgressBar)
+                );
         mWebView = (WebView) findViewById(R.id.webview);
         mWebView.setScrollBarStyle(0);// 滚动条风格，为0就是不给滚动条留空间，滚动条覆盖在网页上
         WebSettings webSettings = mWebView.getSettings();
@@ -72,12 +75,12 @@ public class WebViewActivity extends AppCompatActivity {
         mWebView.setWebChromeClient(new MyWebChromeClient());
 
         mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                slowlyProgressBar.onProgressStart();
+            }
 
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (dialog == null) {
-                    dialog = new MaterialDialog.Builder(WebViewActivity.this).content("请稍后...").progress(true, 0)
-                            .show();
-                }
                 stack.push(url);
                 view.loadUrl(url);
                 return true;
@@ -224,9 +227,8 @@ public class WebViewActivity extends AppCompatActivity {
         public void onProgressChanged(WebView view, int newProgress) {
             // super.onProgressChanged(view, newProgress);
             // setProgress(newProgress * 1000);
-            if (newProgress == 100 && dialog != null && dialog.isShowing()) {
-                dialog.dismiss();
-                dialog = null;
+            slowlyProgressBar.onProgressChange(newProgress);
+            if (newProgress == 100) {
                 if (jsUrl != null) {
                     mWebView.loadUrl(jsUrl);
                 }
