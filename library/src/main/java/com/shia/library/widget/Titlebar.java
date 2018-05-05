@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ public class Titlebar extends RelativeLayout {
 
     private LinearLayout tvBackLayout, tvMore1Layout, tvMore2Layout, tvMore3Layout;
     private TextView tvTitle, tvBack, tvMore1, tvMore2, tvMore3;
+    private ImageView imgBack, imgMore1, imgMore2, imgMore3;
 
     public Titlebar(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -42,6 +44,11 @@ public class Titlebar extends RelativeLayout {
         tvMore1 = (TextView) findViewById(R.id.txt_more1);
         tvMore2 = (TextView) findViewById(R.id.txt_more2);
         tvMore3 = (TextView) findViewById(R.id.txt_more3);
+
+        imgBack = (ImageView) findViewById(R.id.img_back);
+        imgMore1 = (ImageView) findViewById(R.id.img_more1);
+        imgMore2 = (ImageView) findViewById(R.id.img_more2);
+        imgMore3 = (ImageView) findViewById(R.id.img_more3);
 
         tvBackLayout = (LinearLayout) findViewById(R.id.txt_back_layout);
         tvMore1Layout = (LinearLayout) findViewById(R.id.txt_more1_layout);
@@ -89,6 +96,7 @@ public class Titlebar extends RelativeLayout {
     public Titlebar setBackText(String text) {
         setBackVisible(true);
         tvBack.setText(text);
+        imgBack.setVisibility(GONE);
         return this;
     }
 
@@ -99,7 +107,7 @@ public class Titlebar extends RelativeLayout {
      */
     public Titlebar setBackImg(int img) {
         setBackVisible(true);
-        tvBack.setBackgroundResource(img);
+        imgBack.setImageResource(img);
         return this;
     }
 
@@ -146,7 +154,7 @@ public class Titlebar extends RelativeLayout {
      */
     public Titlebar setMoreImg(int img) {
         setMoreVisible(true);
-        tvMore1.setBackgroundResource(img);
+        imgMore1.setImageResource(img);
         return this;
     }
 
@@ -193,7 +201,7 @@ public class Titlebar extends RelativeLayout {
      */
     public Titlebar setMore2Img(int img) {
         setMore2Visible(true);
-        tvMore2.setBackgroundResource(img);
+        imgMore2.setImageResource(img);
         return this;
     }
 
@@ -240,7 +248,7 @@ public class Titlebar extends RelativeLayout {
      */
     public Titlebar setMore3Img(int img) {
         setMore3Visible(true);
-        tvMore3.setBackgroundResource(img);
+        imgMore3.setImageResource(img);
         return this;
     }
 

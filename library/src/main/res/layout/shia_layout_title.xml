@@ -3,21 +3,27 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/title_bar_height"
+                android:paddingLeft="@dimen/title_bar_button_padding_left_right"
+                android:paddingRight="@dimen/title_bar_button_padding_left_right"
                 android:background="@color/colorPrimary">
     <LinearLayout android:id="@+id/txt_back_layout"
                   android:layout_width="wrap_content"
                   android:layout_height="match_parent"
                   android:layout_centerVertical="true"
-                  android:paddingLeft="@dimen/title_bar_margin_left_right"
+                  android:paddingLeft="@dimen/title_bar_button_padding_left_right"
                   android:paddingRight="@dimen/title_bar_button_padding_left_right"
                   android:gravity="center_vertical"
                   android:orientation="horizontal">
+        <ImageView android:id="@+id/img_back"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/ic_avigation"/>
         <TextView android:id="@+id/txt_back"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:textSize="@dimen/title_bar_button_size"
                   android:textColor="@android:color/white"
-                  android:background="@drawable/ic_avigation"/>
+                  tools:text="取消"/>
     </LinearLayout>
 
     <TextView android:id="@id/title"
@@ -41,6 +47,9 @@
                       android:gravity="center"
                       android:paddingLeft="@dimen/title_bar_button_padding_left_right"
                       android:paddingRight="@dimen/title_bar_button_padding_left_right">
+            <ImageView android:id="@+id/img_more3"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
             <TextView android:id="@+id/txt_more3"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
@@ -54,6 +63,9 @@
                       android:gravity="center"
                       android:paddingLeft="@dimen/title_bar_button_padding_left_right"
                       android:paddingRight="@dimen/title_bar_button_padding_left_right">
+            <ImageView android:id="@+id/img_more2"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
             <TextView android:id="@+id/txt_more2"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
@@ -66,7 +78,10 @@
                       android:layout_height="match_parent"
                       android:gravity="center"
                       android:paddingLeft="@dimen/title_bar_button_padding_left_right"
-                      android:paddingRight="@dimen/title_bar_margin_left_right">
+                      android:paddingRight="@dimen/title_bar_button_padding_left_right">
+            <ImageView android:id="@+id/img_more1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
             <TextView android:id="@+id/txt_more1"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
