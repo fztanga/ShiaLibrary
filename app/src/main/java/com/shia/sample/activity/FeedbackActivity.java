@@ -18,7 +18,7 @@ public class FeedbackActivity extends AppCompatActivity {
         super.onCreate(paramBundle);
         setContentView(R.layout.activity_more_feedback);
 
-        ((Titlebar) findViewById(R.id.titlebar)).setMoreTextAction(new View.OnClickListener() {
+        ((Titlebar) findViewById(R.id.titlebar)).setMoreAction(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ToastUtils.showShort("提交");

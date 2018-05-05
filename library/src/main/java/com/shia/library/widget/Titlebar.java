@@ -6,160 +6,264 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.shia.library.R;
-
+import com.shia.library.util.StringUtil;
 
 /**
  * 标题控件
  */
 public class Titlebar extends RelativeLayout {
 
-    private String titleText;
-    private boolean canBack;
-    private ImageView imgBack;
-    private String backText;
-    private String moreText;
-    private int moreImg;
-    private TextView tvMore;
-    private LinearLayout moreLayout;
+    private LinearLayout tvBackLayout, tvMore1Layout, tvMore2Layout, tvMore3Layout;
+    private TextView tvTitle, tvBack, tvMore1, tvMore2, tvMore3;
 
     public Titlebar(Context context, AttributeSet attrs) {
         super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.title, this);
+        LayoutInflater.from(context).inflate(R.layout.shia_layout_title, this);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.Titlebar, 0, 0);
         try {
-            titleText = ta.getString(R.styleable.Titlebar_titleText);
-            canBack = ta.getBoolean(R.styleable.Titlebar_canBack, false);
-            backText = ta.getString(R.styleable.Titlebar_backText);
-            moreImg = ta.getResourceId(R.styleable.Titlebar_moreImg, 0);
-            moreText = ta.getString(R.styleable.Titlebar_moreText);
-            setUpView();
+            String titleText = ta.getString(R.styleable.Titlebar_titleText);
+            boolean canBack = ta.getBoolean(R.styleable.Titlebar_canBack, true);
+            String backText = ta.getString(R.styleable.Titlebar_backText);
+            int moreImg = ta.getResourceId(R.styleable.Titlebar_moreImg, 0);
+            String moreText = ta.getString(R.styleable.Titlebar_moreText);
+            setUpView(titleText, canBack, backText, moreText, moreImg);
         } finally {
             ta.recycle();
         }
     }
 
-    private void setUpView() {
-        TextView tvTitle = (TextView) findViewById(R.id.title);
+    private void setUpView(String titleText, boolean canBack, String backText, String moreText, int moreImg) {
+        tvTitle = (TextView) findViewById(R.id.title);
+        tvBack = (TextView) findViewById(R.id.txt_back);
+        tvMore1 = (TextView) findViewById(R.id.txt_more1);
+        tvMore2 = (TextView) findViewById(R.id.txt_more2);
+        tvMore3 = (TextView) findViewById(R.id.txt_more3);
+
+        tvBackLayout = (LinearLayout) findViewById(R.id.txt_back_layout);
+        tvMore1Layout = (LinearLayout) findViewById(R.id.txt_more1_layout);
+        tvMore2Layout = (LinearLayout) findViewById(R.id.txt_more2_layout);
+        tvMore3Layout = (LinearLayout) findViewById(R.id.txt_more3_layout);
+        setBackVisible(false);
+        setMoreVisible(false);
+        setMore2Visible(false);
+        setMore3Visible(false);
+
         tvTitle.setText(titleText);
-        LinearLayout backBtn = (LinearLayout) findViewById(R.id.title_back);
-        imgBack = (ImageView) findViewById(R.id.img_back);
-        if (!canBack) {
-            imgBack.setVisibility(GONE);
+        if (StringUtil.isNotEmpty(backText)) {
+            setBackText(backText);
+            setBackAction(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((Activity) getContext()).finish();
+                }
+            });
         }
-        if (backText != null && !"".equals(backText)) {
-            TextView tvBack = (TextView) findViewById(R.id.txt_back);
-            tvBack.setText(backText);
+        setBackVisible(canBack);
 
-            canBack = true;
-        }
-        backBtn.setVisibility(canBack ? VISIBLE : INVISIBLE);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((Activity) getContext()).finish();
-            }
-        });
-
-        if (moreImg != 0) {
-            ImageView moreImgView = (ImageView) findViewById(R.id.img_more);
-            moreImgView.setImageDrawable(getContext().getResources().getDrawable(moreImg));
-        }
-        tvMore = (TextView) findViewById(R.id.txt_more);
-        tvMore.setText(moreText);
-        moreLayout = (LinearLayout) findViewById(R.id.txt_more_layout);
-        if (moreText == null || "".equals(moreText)) {
-            moreLayout.setVisibility(GONE);
+        if (moreImg > 0) {
+            setMoreImg(moreImg);
+        } else if (StringUtil.isNotEmpty(moreText)) {
+            setMoreText(moreText);
         }
     }
 
     /**
      * 标题控件
      *
-     * @param titleText
-     *            设置标题文案
+     * @param titleText 设置标题文案
      */
-    public void setTitleText(String titleText) {
-        this.titleText = titleText;
-        TextView tvTitle = (TextView) findViewById(R.id.title);
+    public Titlebar setTitleText(String titleText) {
         tvTitle.setText(titleText);
-    }
-
-    public void setBackImg(int img) {
-        findViewById(R.id.title_back).setVisibility(VISIBLE);
-        imgBack.setVisibility(VISIBLE);
-        imgBack.setImageDrawable(getContext().getResources().getDrawable(img));
-    }
-
-    public void setBackAction(View.OnClickListener listener) {
-        LinearLayout backBtn = (LinearLayout) findViewById(R.id.title_back);
-        backBtn.setOnClickListener(listener);
+        return this;
     }
 
     /**
-     * 标题更多按钮
+     * 设置返回文字内容
      *
-     * @param img
-     *            设置更多按钮
+     * @param text 返回文本
      */
-    public void setMoreImg(int img) {
-        moreImg = img;
-        ImageView moreImgView = (ImageView) findViewById(R.id.img_more);
-        moreImgView.setImageDrawable(getContext().getResources().getDrawable(moreImg));
+    public Titlebar setBackText(String text) {
+        setBackVisible(true);
+        tvBack.setText(text);
+        return this;
     }
 
     /**
-     * 设置更多按钮事件
+     * 标题返回按钮图标
      *
-     * @param listener
-     *            事件监听
+     * @param img 设置返回按钮
      */
-    public void setMoreImgAction(View.OnClickListener listener) {
-        ImageView moreImgView = (ImageView) findViewById(R.id.img_more);
-        moreImgView.setOnClickListener(listener);
-    }
-
-    public void setMoreTextImg(int img) {
-        tvMore.setBackground(getContext().getResources().getDrawable(img));
+    public Titlebar setBackImg(int img) {
+        setBackVisible(true);
+        tvBack.setBackgroundResource(img);
+        return this;
     }
 
     /**
-     * 设置更多按钮事件
+     * 返回事件
      *
      * @param listener
-     *            事件监听
+     * @return
      */
-    public void setMoreTextAction(View.OnClickListener listener) {
-        moreLayout.setVisibility(VISIBLE);
-        moreLayout.setOnClickListener(listener);
+    public Titlebar setBackAction(OnClickListener listener) {
+        setBackVisible(true);
+        tvBackLayout.setOnClickListener(listener);
+        return this;
+    }
+
+    /**
+     * 设置返回按钮是否显示
+     *
+     * @param show 是否显示
+     * @return
+     */
+    public Titlebar setBackVisible(boolean show) {
+        tvBackLayout.setVisibility(show ? VISIBLE : GONE);
+        return this;
     }
 
     /**
      * 设置更多文字内容
      *
-     * @param text
-     *            更多文本
+     * @param text 更多文本
+     * @return
      */
-    public void setMoreTextContext(String text) {
-        tvMore.setText(text);
-        moreLayout.setVisibility(VISIBLE);
+    public Titlebar setMoreText(String text) {
+        setMoreVisible(true);
+        tvMore1.setText(text);
+        return this;
     }
 
     /**
-     * 设置返回按钮事件
+     * 标题更多按钮图标
      *
-     * @param listener
-     *            事件监听
+     * @param img 设置更多按钮
+     * @return
      */
-    public void setBackListener(View.OnClickListener listener) {
-        if (canBack) {
-            LinearLayout backBtn = (LinearLayout) findViewById(R.id.title_back);
-            backBtn.setOnClickListener(listener);
-        }
+    public Titlebar setMoreImg(int img) {
+        setMoreVisible(true);
+        tvMore1.setBackgroundResource(img);
+        return this;
     }
 
+    /**
+     * 设置更多按钮事件
+     *
+     * @param listener 事件监听
+     * @return
+     */
+    public Titlebar setMoreAction(OnClickListener listener) {
+        setMoreVisible(true);
+        tvMore1Layout.setOnClickListener(listener);
+        return this;
+    }
+
+    /**
+     * 设置更多按钮是否显示
+     *
+     * @param show 是否显示
+     * @return
+     */
+    public Titlebar setMoreVisible(boolean show) {
+        tvMore1Layout.setVisibility(show ? VISIBLE : GONE);
+        return this;
+    }
+
+    /**
+     * 设置更多2文字内容
+     *
+     * @param text 更多文本
+     * @return
+     */
+    public Titlebar setMore2Text(String text) {
+        setMore2Visible(true);
+        tvMore2.setText(text);
+        return this;
+    }
+
+    /**
+     * 标题更多2按钮图标
+     *
+     * @param img 设置更多按钮
+     * @return
+     */
+    public Titlebar setMore2Img(int img) {
+        setMore2Visible(true);
+        tvMore2.setBackgroundResource(img);
+        return this;
+    }
+
+    /**
+     * 设置更多2按钮事件
+     *
+     * @param listener 事件监听
+     * @return
+     */
+    public Titlebar setMore2Action(OnClickListener listener) {
+        setMore2Visible(true);
+        tvMore2Layout.setOnClickListener(listener);
+        return this;
+    }
+
+    /**
+     * 设置更多2按钮是否显示
+     *
+     * @param show 是否显示
+     * @return
+     */
+    public Titlebar setMore2Visible(boolean show) {
+        tvMore2Layout.setVisibility(show ? VISIBLE : GONE);
+        return this;
+    }
+
+    /**
+     * 设置更多3文字内容
+     *
+     * @param text 更多文本
+     * @return
+     */
+    public Titlebar setMore3Text(String text) {
+        setMore3Visible(true);
+        tvMore3.setText(text);
+        return this;
+    }
+
+    /**
+     * 标题更多3按钮图标
+     *
+     * @param img 设置更多按钮
+     * @return
+     */
+    public Titlebar setMore3Img(int img) {
+        setMore3Visible(true);
+        tvMore3.setBackgroundResource(img);
+        return this;
+    }
+
+    /**
+     * 设置更多3按钮事件
+     *
+     * @param listener 事件监听
+     * @return
+     */
+    public Titlebar setMore3Action(OnClickListener listener) {
+        setMore3Visible(true);
+        tvMore3Layout.setOnClickListener(listener);
+        return this;
+    }
+
+    /**
+     * 设置更多3按钮是否显示
+     *
+     * @param show 是否显示
+     * @return
+     */
+    public Titlebar setMore3Visible(boolean show) {
+        tvMore3Layout.setVisibility(show ? VISIBLE : GONE);
+        return this;
+    }
 }

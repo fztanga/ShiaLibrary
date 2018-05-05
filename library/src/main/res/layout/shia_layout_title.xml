@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/title_bar_height"
+                android:background="@color/colorPrimary">
+    <LinearLayout android:id="@+id/txt_back_layout"
+                  android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:layout_centerVertical="true"
+                  android:paddingLeft="@dimen/title_bar_margin_left_right"
+                  android:paddingRight="@dimen/title_bar_button_padding_left_right"
+                  android:gravity="center_vertical"
+                  android:orientation="horizontal">
+        <TextView android:id="@+id/txt_back"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/title_bar_button_size"
+                  android:textColor="@android:color/white"
+                  android:background="@drawable/ic_avigation"/>
+    </LinearLayout>
+
+    <TextView android:id="@id/title"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerInParent="true"
+              android:textSize="@dimen/title_bar_title_size"
+              android:singleLine="true"
+              android:textColor="@android:color/white"
+              tools:text="@string/app_name"/>
+
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:layout_centerVertical="true"
+                  android:layout_alignParentEnd="true"
+                  android:gravity="center_vertical"
+                  android:orientation="horizontal">
+        <LinearLayout android:id="@+id/txt_more3_layout"
+                      android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:gravity="center"
+                      android:paddingLeft="@dimen/title_bar_button_padding_left_right"
+                      android:paddingRight="@dimen/title_bar_button_padding_left_right">
+            <TextView android:id="@+id/txt_more3"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="@dimen/title_bar_button_size"
+                      android:textColor="@android:color/white"
+                      tools:text="按钮3"/>
+        </LinearLayout>
+        <LinearLayout android:id="@+id/txt_more2_layout"
+                      android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:gravity="center"
+                      android:paddingLeft="@dimen/title_bar_button_padding_left_right"
+                      android:paddingRight="@dimen/title_bar_button_padding_left_right">
+            <TextView android:id="@+id/txt_more2"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="@dimen/title_bar_button_size"
+                      android:textColor="@android:color/white"
+                      tools:text="按钮2"/>
+        </LinearLayout>
+        <LinearLayout android:id="@+id/txt_more1_layout"
+                      android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:gravity="center"
+                      android:paddingLeft="@dimen/title_bar_button_padding_left_right"
+                      android:paddingRight="@dimen/title_bar_margin_left_right">
+            <TextView android:id="@+id/txt_more1"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="@dimen/title_bar_button_size"
+                      android:textColor="@android:color/white"
+                      tools:text="按钮1"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
