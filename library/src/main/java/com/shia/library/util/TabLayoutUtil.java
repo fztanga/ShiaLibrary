@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import com.flyco.tablayout.CommonTabLayout;
+import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -14,8 +15,56 @@ import java.util.List;
 
 public class TabLayoutUtil {
 
-    public static void initTabLayout(FragmentManager fm, final SlidingTabLayout tabLayout, final ViewPager viewPager,
-            final List<Fragment> fragments, final String[] titles, int limit) {
+    public static void initSegmentTabLayout(FragmentManager fm, final SegmentTabLayout tabLayout,
+            final ViewPager viewPager, final List<Fragment> fragments, final String[] titles, int limit) {
+        viewPager.setOffscreenPageLimit(limit);
+        viewPager.setAdapter(new FragmentPagerAdapter(fm) {
+
+            @Override
+            public int getCount() {
+                return fragments.size();
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return titles[position];
+            }
+
+            @Override
+            public Fragment getItem(int position) {
+                return fragments.get(position);
+            }
+        });
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                tabLayout.setCurrentTab(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+        tabLayout.setTabData(titles);
+        tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                viewPager.setCurrentItem(position);
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+            }
+        });
+        viewPager.setCurrentItem(0);
+    }
+
+    public static void initSlidingTabLayout(FragmentManager fm, final SlidingTabLayout tabLayout,
+            final ViewPager viewPager, final List<Fragment> fragments, final String[] titles, int limit) {
         viewPager.setOffscreenPageLimit(limit);
         viewPager.setAdapter(new FragmentPagerAdapter(fm) {
 
@@ -38,8 +87,8 @@ public class TabLayoutUtil {
         viewPager.setCurrentItem(0);
     }
 
-    public static void initTabLayout(FragmentManager fm, final CommonTabLayout tabLayout, final ViewPager viewPager,
-            final ArrayList<CustomTabEntity> tabEntities, int limit) {
+    public static void initCommonTabLayout(FragmentManager fm, final CommonTabLayout tabLayout,
+            final ViewPager viewPager, final ArrayList<CustomTabEntity> tabEntities, int limit) {
         viewPager.setOffscreenPageLimit(limit);
         viewPager.setAdapter(new FragmentPagerAdapter(fm) {
 

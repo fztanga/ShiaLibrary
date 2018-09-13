@@ -43,7 +43,7 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.github.yoojia:next-inputs-android:1.4'
     compile 'com.github.yoojia:next-inputs:1.8'
-    compile 'com.blankj:utilcode:1.12.3'
+    compile 'com.blankj:utilcode:1.20.3'
     compile 'org.parceler:parceler-api:1.0.4'
     annotationProcessor "org.parceler:parceler:1.0.4"
     testCompile 'junit:junit:4.12'

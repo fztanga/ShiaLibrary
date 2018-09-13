@@ -5,9 +5,9 @@ import android.content.Context;
 import android.util.Log;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.Utils;
+import com.shia.library.http.RxRetrofit;
 import com.shia.sample.BuildConfig;
 import com.shia.sample.bean.User;
-import com.shia.library.http.RxRetrofit;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -26,11 +26,7 @@ public class AppApplication extends Application {
         super.onCreate();
         mApp = this;
 
-        if (BuildConfig.DEBUG) {
-            RxRetrofit.config(this, "http://mobile.whkpb.gov.cn/");
-        } else {
-            RxRetrofit.config(this, "http://mobile.whkpb.gov.cn/");
-        }
+        RxRetrofit.config(this, "http://mobile.whkpb.gov.cn/", 30, BuildConfig.DEBUG);
         Log.d(TAG, RxRetrofit.BASE_URL);
 
         Utils.init(this);

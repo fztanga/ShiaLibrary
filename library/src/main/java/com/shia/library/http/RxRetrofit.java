@@ -26,29 +26,25 @@ public class RxRetrofit {
 
     private static Context CONTEXT;
     public static String BASE_URL;
+    public static int TIMEOUT = 20;
     private static Retrofit RETROFIT;
     private static boolean DEBUG;
 
-    public static void config(Context context, String baseUrl) {
-        config(context, baseUrl, true);
-    }
 
-    public static void config(Context context, String baseUrl, boolean isDebug) {
+    public static void config(Context context, String baseUrl, int timeout, boolean isDebug) {
         CONTEXT = context;
         BASE_URL = baseUrl;
+        TIMEOUT = timeout;
         DEBUG = isDebug;
-        RETROFIT = getRetrofit(context, baseUrl);
+        RETROFIT = getRetrofit(context, baseUrl, timeout, isDebug, null);
     }
 
     public static void resetWithInterceptor(Interceptor interceptor) {
-        RETROFIT = getRetrofit(CONTEXT, BASE_URL, interceptor);
+        RETROFIT = getRetrofit(CONTEXT, BASE_URL, TIMEOUT, DEBUG, interceptor);
     }
 
-    public static Retrofit getRetrofit(final Context context, String baseUrl) {
-        return getRetrofit(context, baseUrl, null);
-    }
 
-    public static Retrofit getRetrofit(final Context context, String baseUrl, Interceptor interceptor) {
+    public static Retrofit getRetrofit(final Context context, String baseUrl, int timeout, boolean isDebug, Interceptor interceptor) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         // 设置缓存
         final File chachefile = new File(context.getExternalCacheDir(), "HttpCache");
@@ -139,9 +135,9 @@ public class RxRetrofit {
         builder.cookieJar(new JavaNetCookieJar(cookieManager));
         // 设置超时和重连
         // 设置超时
-        builder.connectTimeout(15, TimeUnit.SECONDS);
-        builder.readTimeout(20, TimeUnit.SECONDS);
-        builder.writeTimeout(20, TimeUnit.SECONDS);
+        builder.connectTimeout(timeout, TimeUnit.SECONDS);
+        builder.readTimeout(timeout, TimeUnit.SECONDS);
+        builder.writeTimeout(timeout, TimeUnit.SECONDS);
         // 错误重连
         builder.retryOnConnectionFailure(false);
         // 以上设置结束，才能build(),不然设置白搭
